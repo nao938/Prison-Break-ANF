@@ -25,6 +25,9 @@
   <script>
     $(document).ready(
       function () {
+
+        // variables du jeu
+        let jsLargeur = 500
          
         // Fplay
         let Fplay = function (Pfile) {  // Début fonction Fplay
@@ -684,7 +687,8 @@ let Fscene13 = function () { // Début Fscene13
           oOption = {
             buttons: oBouton,
             title: 'Prison Break',
-            show: { effect: 'blind' }
+            show: { effect: 'blind' },
+            width: jsLargeur
           }
 
           $(shtml).dialog(oOption)
