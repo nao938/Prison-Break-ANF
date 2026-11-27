@@ -16,6 +16,7 @@
   <!-- ajouter balise de style -->
   <link rel="stylesheet" href="style.css">
 
+  <link rel="preload" href="musique_de_fond.mp3" as="audio" type="audio/mpeg" fetchpriority="high">
 
 </head>
 
@@ -36,7 +37,7 @@
 
         // Fplay
         var Fplay = function (Pfile) {
-          var oAudio = $('<audio autoplay> <source src="' + Pfile + '"></audio>')
+          var oAudio = $('<audio autoplay > <source src="' + Pfile + '"></audio>')
           $('body').append(oAudio)
         } //fin Fplay
 
