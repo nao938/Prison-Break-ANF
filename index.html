@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Projet Escape Game</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css">
+
+  <!-- JQuery téléchargement -->
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/jquery-ui/dist/jquery-ui.min.js"></script>
+
+  <!-- adapter le thème choisir :  -->
+  <link rel="stylesheet" href="https://unpkg.com/jquery-ui/dist/themes/dark-hive/jquery-ui.min.css">
+
+  <!-- ajouter balise de style -->
+  <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+  <p><button id="idStop">Stop</button></p>
+
+  <script>
+    $(document).ready(
+      function () {
+        // écrire le JQuery ici
+        console.log('*** JQuery ' + $.fn.jquery + ' prêt ***')
+        // Fstop
+        var Fstop = function () {
+          $('audio').remove()
+        } //fin Fstop
+        $('#idStop').on('click', Fstop)
+
+        // Fplay
+        var Fplay = function (Pfile) {
+          var oAudio = $('<audio autoplay> <source src="' + Pfile + '"></audio>')
+          $('body').append(oAudio)
+        } //fin Fplay
+
+
+        // Fscene2
+let Fscene2 = function () { // Début Fscene2
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('tictac.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p>Le couloir est vide et les surveillants sont en pause.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="cellule.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton recommence
+          'Tenter d\'ouvrir la porte ' : function() { $(this).on('dialogclose', Fscene02).dialog('close').dialog('destroy').remove() } ,
+          'Fouiller la cellule': function() { $(this).on('dialogclose', Fscene3).dialog('close').dialog('destroy').remove() } ,
+          'Examiner la serrure'  : function() { $('<div> Tu as remarqué que la serrure était fragile. (-1min30) </div>').dialog() } ,
+        }
+
+          oOption = {
+            buttons: oBouton,
+            title: 'Réflexion...',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene2
+
+
+ let Fscene02 = function () { // Début Fscene02
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('fin.mp4')
+
+          let shtml = '<div>'
+          shtml += '<p>Aahh ! Tu as fait trop de bruit, les surveillants t’ont entendu !</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="police2.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+        }
+
+          oOption = {
+            buttons: oBouton,
+            title: 'GAME OVER',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene02
+
+
+let Fscene3 = function() { // Début Fscene3
+  // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('succes.mp3')
+
+        let shtml = '<div>'
+          shtml += '<p> Bingo ! Tu as trouvé une épingle. (-1min30) </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="épingle.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton
+          'Fouiller encore': function() { $('<div> Tu trouves un indice concernant un code, mais tu perds 2 minutes.</div>').dialog() },
+          'T\'enter d\'ouvrir la porte'  :  function () { $(this).on('dialogclose', Fscene4).dialog('close').dialog('destroy').remove()  },
+        }
+
+          oOption = {
+            buttons: oBouton,
+            title: 'Réflexion...',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        }
+
+let Fscene4 = function () { // Début Fscene4
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('porte.m4a')
+
+          let shtml = '<div>'
+          shtml += '<p> Parfait, la porte est ouverte. </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="ouvert.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Sortir' : function() { $(this).on('dialogclose', Fscene5).dialog('close').dialog('destroy').remove() } ,
+         
+        }
+
+          oOption = {
+            buttons: oBouton,
+            title: 'Vite !',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene4
+
+
+let Fscene5 = function () { // Début Fscene5
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('coeur.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p>Sortie de la cellule, le couloir est toujours vide, 2 chemins possibles !</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="choix.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Aller au bureau de surveillance ' : function() { $(this).on('dialogclose', Fscene6).dialog('close').dialog('destroy').remove() } ,
+          'Descendre au sous-sol ': function() { $(this).on('dialogclose', Fscene7).dialog('close').dialog('destroy').remove() } ,
+        }
+
+          oOption = {
+            buttons: oBouton,
+            title: 'Gauche ou droite',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene5
+
+
+ let Fscene6 = function () { // Début Fscene6
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('ordi.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p>Dans le bureau, un trousseau de clé est accroché au mur et une armoire métallique est entrouverte.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="bureau.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Prendre les clés' : function() { $(this).on('dialogclose', Fscene06).dialog('close').dialog('destroy').remove() } ,
+          'Ouvrir l\'armoire': function() { $(this).on('dialogclose', Fscene8).dialog('close').dialog('destroy').remove() } ,
+          'Faire les deux' : function() { $(this).on('dialogclose', Fscene006).dialog('close').dialog('destroy').remove() } ,
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Bureau de surveillance',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene6
+
+  let Fscene06 = function () { // Début Fscene06
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('fin.mp4')
+
+          let shtml = '<div>'
+          shtml += '<p>En prenant les clés, tu les as accidentellement fait tombé ce qui a attiré les surveillants.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="police2.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+          
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'GAME OVER',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene06
+
+
+let Fscene006 = function () { // Début Fscene006
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('fin.mp4')
+
+          let shtml = '<div>'
+          shtml += '<p>En te précipitant, tu as renversé une tasse de café. A cause du bruit, les surveillants ont débarqué.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="police2.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+          
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'GAME OVER',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene006
+
+
+let Fscene8 = function () { // Début Fscene8
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('succes.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p>Dans l\'armoire tu trouves plein de documents et un badge d’accès.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="armoire.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Prendre le badge' : function() { $(this).on('dialogclose', Fscene9).dialog('close').dialog('destroy').remove() } ,
+          'Lire les documents' : function() { $('<div> Cela ne t\'a pas aidé, tu as perdu 3min </div>') .dialog() }
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Réflexion...',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene8
+
+let Fscene9 = function () { // Début Fscene8
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('coeur.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p>Le badge te permet d’accéder aux caméras. Tu peux les désactiver pour avancer plus discrètement. </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="badge.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Désactiver les caméras': function() { $(this).on('dialogclose', Fscene09).dialog('close').dialog('destroy').remove() } ,
+          'Continuer sans désactiver les caméras' : function() { $(this).on('dialogclose', Fscene10).dialog('close').dialog('destroy').remove() } ,
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Réflexion...',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene9
+
+
+let Fscene09 = function () { // Début Fscene09
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p>En voulant désactiver les caméras tu as appuyé sur le mauvais bouton et une alarme s’est enclenché.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="police2.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+          
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'GAME OVER',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene09
+
+let Fscene10 = function () { // Début Fscene10
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('succes.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> Ouf ! Tu as évité de déclencher l\'alarme. Bon il n\'y a plus rien dans le bureau.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="sortie.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Sortir du bureau' : function() { $(this).on('dialogclose', Fscene11).dialog('close').dialog('destroy').remove() } , 
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Bon choix',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene10
+
+let Fscene11 = function () { // Début Fscene11
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('tictac.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> Une caméra surveille le couloir. Tu aperçois une porte de service à droite et un escalier au fond </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="couloir.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Attendre que la caméra pivote' : function() { $(this).on('dialogclose', Fscene12).dialog('close').dialog('destroy').remove() } , 
+          'Emprunter la porte de service' : function() { $(this).on('dialogclose', Fscene16).dialog('close').dialog('destroy').remove() } , 
+          'Aller vers l\'escalier' : function() { $(this).on('dialogclose', Fscene18).dialog('close').dialog('destroy').remove() } , 
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Couloir de surveillance',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene11
+
+
+let Fscene12 = function () { // Début Fscene12
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('succes.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> Tu as réussi à passer sans être repéré ! (-1 min)  </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="discret.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Cour extérieure' : function() { $(this).on('dialogclose', Fscene012).dialog('close').dialog('destroy').remove() } ,  
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Bien joué !',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene11
+
+let Fscene012 = function () { // Début Fscene012
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('nuit.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> Un projecteur balaie la cour. Le portail de sortie se trouve à quelques mettres et une porte métallique se trouve sur la gauche </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="cour.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Traverser la cour' : function() { $(this).on('dialogclose', Fscene13).dialog('close').dialog('destroy').remove() } , 
+          'Examiner la porte metallique' : function() { $(this).on('dialogclose', Fscene14).dialog('close').dialog('destroy').remove() } , 
+          
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Cour extérieure',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene012
+
+
+
+let Fscene13 = function () { // Début Fscene13
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> T\'y était preque. Dommage que le projecteur t\'ai repéré</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="traquer.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'GAME OVER',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene13
+
+        let Fscene14 = function () { // Début Fscene14
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> En examinant la porte tu trouves un lecteur de badge sur la porte. </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="lecteur.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Utiliser le badge' : function() { $(this).on('dialogclose', Fscene15).dialog('close').dialog('destroy').remove() } , 
+          'Ne pas utiliser le badge' : function() { $('<div> Il faut faire quelque chose ! (-30 sec) </div>') .dialog() },
+          'Retourner en arrière' : function() { $(this).on('dialogclose', Fscene012).dialog('close').dialog('destroy').remove() } 
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Réflexion...',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene14
+
+
+
+        let Fscene15 = function () { // Début Fscene11
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> Bravo ! Grâce au badge récuperé précedemment tu as pu ouvrir la porte et sortir de la prison. Tu es Libre !!</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="libre.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Libérable !',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene15
+
+
+
+
+        let Fscene16 = function () { // Début Fscene16
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> Tu entres dans un local rempli de cartons. Tu aperçois une lampe torche et un plan d’évacuation. Soudain, tu entends des pas derrière toi. </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="local.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Prendre la lampe' : function() { $(this).on('dialogclose', Fscene17).dialog('close').dialog('destroy').remove() } , 
+          'Examiner le plan' : function() { $(this).on('dialogclose', Fscene017).dialog('close').dialog('destroy').remove() } , 
+          'Sortir immédiatement' : function() { $(this).on('dialogclose', Fscene012).dialog('close').dialog('destroy').remove() } , 
+          
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Suspense...',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene16
+
+        let Fscene17 = function () { // Début Fscene17
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> La lampe pourra peut-être te servir après. (-30sec) </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="lampe.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Sortir du local' : function() { $(this).on('dialogclose', Fscene012).dialog('close').dialog('destroy').remove() } , 
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'Suspense...',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene17
+
+        let Fscene017 = function () { // Début Fscene017
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> Tu as mis trop de temps. Un surveillant est entré dans le local. </p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="repéré.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+          'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'GAME OVER',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene017
+
+
+        let Fscene18 = function () { // Début Fscene18
+          // Stopper précedents sons
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('clairon.mp3')
+
+          let shtml = '<div>'
+          shtml += '<p> En traversant le couloir pour rejoindre l\'escalier la caméra t\'a repéré. L\'alarme s\'est déclenchée.</p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="repéré.png"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            // Bouton 
+           'Recommencer' : function() { $(this).on('dialogclose', Fscene1).dialog('close').dialog('destroy').remove() } ,
+          'Terminer':  function () { $(this).dialog('close').dialog('destroy').remove() }
+          }
+          oOption = {
+            buttons: oBouton,
+            title: 'GAME OVER',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        } // fin Fscene18
+
+
+
+        // Debut de Fscene1 
+        let Fscene1 = function () {
+
+          // Stopper le son 
+          Fstop()
+          // Jouer son splash.mp3
+          Fplay('police.mp3')
+
+          var shtml = '<div>'
+          shtml += '<p>Evadez-vous en <u>10 minutes</u> !<p>'
+          shtml += '<hr/>'
+          shtml += '<center><img src="prisonnier.jpg"></center>'
+          shtml += '</div>'
+
+          oBouton = {
+            'Départ': function () { $(this).on('dialogclose', Fscene2).dialog('close').dialog('destroy').remove()  },
+            'Fin': function () { $(this).dialog('close').dialog('destroy').remove() }
+          }
+
+          oOption = {
+            buttons: oBouton,
+            title: 'Prison Break',
+            show: { effect: 'blind' }
+          }
+
+          $(shtml).dialog(oOption)
+        }
+        // fin de Fscene1
+
+        // Invoquer Fscene1 pour démarrer le jeu
+        Fscene1()
+
+
+      })// fin du JQuery
+
+  </script>
+</body>
+
+</html>
