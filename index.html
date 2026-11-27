@@ -22,32 +22,73 @@
 
 <body>
 
-  <p><button id="idStop">Stop</button></p>
-
   <script>
     $(document).ready(
       function () {
-        // écrire le JQuery ici
-        console.log('*** JQuery ' + $.fn.jquery + ' prêt ***')
-        // Fstop
-        var Fstop = function () {
-          $('audio').remove()
-        } //fin Fstop
-        $('#idStop').on('click', Fstop)
-
+         
         // Fplay
-        var Fplay = function (Pfile) {
-          var oAudio = $('<audio autoplay > <source src="' + Pfile + '"></audio>')
+        let Fplay = function (Pfile) {  // Début fonction Fplay
+          let oAudio = $('<audio autoplay id= "idFX"    > <source src="' + Pfile + '"></audio>')
           $('body').append(oAudio)
         } //fin Fplay
+
+        // Fstop
+        let Fstop = function () {
+          // Début fonction Fstop 
+          $('#idFX').remove()
+        } //fin Fstop
+
+        // FstopZIK
+        let FstopZIK = function () {
+          // Début fonction FstopZIK
+          $('#idBTzik').remove()
+          $('#idZik').remove()
+
+        } //fin FstopZIK
+
+// FcontinueZIK
+        let FcontinueZIK = function () { // Début fonction FcontinueZIK
+          let oAudio = $('#idZIK')
+          let jsAudio = oAudio[0]
+          jsAudio.play()
+          $('#idBTzik').remove()
+          let oBT = $('<button id="idBTzik">pause</button>')
+          $('body').append(oBT)
+          oBT.on('click', FpauseZIK)
+
+        } //fin FcontinueZIK
+
+        // FpauseZIK
+        let FpauseZIK = function () { // Début fonction FplayZIK
+          let oAudio = $('#idZIK')
+          let jsAudio = oAudio[0]
+          jsAudio.pause()
+          $('#idBTzik').remove()
+          let oBT = $('<button id ="idBTzik">Continue</bouton>')
+          $('body').append(oBT)
+          oBT.on('click', FcontinueZIK)
+
+        } //fin FpauseZIK
+
+
+        // FplayZIK
+        let FplayZIK = function () { // Début fonction FplayZIK
+          let oAudio = $('<audio autoplay loop id="idZIK"><source src="musique_de_fond.mp3"></audio>')
+          $('body').append(oAudio)
+          $('#idBTzik').remove()
+          let oBT = $('<button id="idBTzik">Pause</button>')
+          $('body').append(oBT)
+          oBT.on('click', FpauseZIK)
+        } //fin FplayZIK
 
 
         // Fscene2
 let Fscene2 = function () { // Début Fscene2
-          // Stopper précedents sons
-          Fstop()
+        Fstop()
+          FplayZIK()  
           // Jouer son splash.mp3
           Fplay('tictac.mp3')
+        
 
           let shtml = '<div>'
           shtml += '<p>Le couloir est vide et les surveillants sont en pause.</p>'
@@ -73,8 +114,7 @@ let Fscene2 = function () { // Début Fscene2
 
 
  let Fscene02 = function () { // Début Fscene02
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('fin.mp4')
 
@@ -101,8 +141,7 @@ let Fscene2 = function () { // Début Fscene2
 
 
 let Fscene3 = function() { // Début Fscene3
-  // Stopper précedents sons
-          Fstop()
+  
           // Jouer son splash.mp3
           Fplay('succes.mp3')
 
@@ -128,8 +167,7 @@ let Fscene3 = function() { // Début Fscene3
         }
 
 let Fscene4 = function () { // Début Fscene4
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('porte.m4a')
 
@@ -156,8 +194,7 @@ let Fscene4 = function () { // Début Fscene4
 
 
 let Fscene5 = function () { // Début Fscene5
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('coeur.mp3')
 
@@ -184,8 +221,7 @@ let Fscene5 = function () { // Début Fscene5
 
 
  let Fscene6 = function () { // Début Fscene6
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('ordi.mp3')
 
@@ -211,8 +247,7 @@ let Fscene5 = function () { // Début Fscene5
         } // fin Fscene6
 
   let Fscene06 = function () { // Début Fscene06
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('fin.mp4')
 
@@ -239,8 +274,7 @@ let Fscene5 = function () { // Début Fscene5
 
 
 let Fscene006 = function () { // Début Fscene006
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('fin.mp4')
 
@@ -267,8 +301,7 @@ let Fscene006 = function () { // Début Fscene006
 
 
 let Fscene8 = function () { // Début Fscene8
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('succes.mp3')
 
@@ -293,8 +326,7 @@ let Fscene8 = function () { // Début Fscene8
         } // fin Fscene8
 
 let Fscene9 = function () { // Début Fscene8
-          // Stopper précedents sons
-          Fstop()
+         
           // Jouer son splash.mp3
           Fplay('coeur.mp3')
 
@@ -320,8 +352,7 @@ let Fscene9 = function () { // Début Fscene8
 
 
 let Fscene09 = function () { // Début Fscene09
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -347,8 +378,7 @@ let Fscene09 = function () { // Début Fscene09
         } // fin Fscene09
 
 let Fscene10 = function () { // Début Fscene10
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('succes.mp3')
 
@@ -372,8 +402,7 @@ let Fscene10 = function () { // Début Fscene10
         } // fin Fscene10
 
 let Fscene11 = function () { // Début Fscene11
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('tictac.mp3')
 
@@ -400,8 +429,7 @@ let Fscene11 = function () { // Début Fscene11
 
 
 let Fscene12 = function () { // Début Fscene12
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('succes.mp3')
 
@@ -425,8 +453,7 @@ let Fscene12 = function () { // Début Fscene12
         } // fin Fscene11
 
 let Fscene012 = function () { // Début Fscene012
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('nuit.mp3')
 
@@ -454,8 +481,7 @@ let Fscene012 = function () { // Début Fscene012
 
 
 let Fscene13 = function () { // Début Fscene13
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -480,8 +506,7 @@ let Fscene13 = function () { // Début Fscene13
         } // fin Fscene13
 
         let Fscene14 = function () { // Début Fscene14
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -509,8 +534,7 @@ let Fscene13 = function () { // Début Fscene13
 
 
         let Fscene15 = function () { // Début Fscene11
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -538,8 +562,7 @@ let Fscene13 = function () { // Début Fscene13
 
 
         let Fscene16 = function () { // Début Fscene16
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -566,8 +589,7 @@ let Fscene13 = function () { // Début Fscene13
         } // fin Fscene16
 
         let Fscene17 = function () { // Début Fscene17
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -591,8 +613,7 @@ let Fscene13 = function () { // Début Fscene13
         } // fin Fscene17
 
         let Fscene017 = function () { // Début Fscene017
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -618,8 +639,7 @@ let Fscene13 = function () { // Début Fscene13
 
 
         let Fscene18 = function () { // Début Fscene18
-          // Stopper précedents sons
-          Fstop()
+          
           // Jouer son splash.mp3
           Fplay('clairon.mp3')
 
@@ -647,11 +667,8 @@ let Fscene13 = function () { // Début Fscene13
 
         // Debut de Fscene1 
         let Fscene1 = function () {
-
-          // Stopper le son 
-          Fstop()
-          // Jouer son splash.mp3
-          Fplay('police.mp3')
+        
+          
 
           var shtml = '<div>'
           shtml += '<p>Evadez-vous en <u>10 minutes</u> !<p>'
